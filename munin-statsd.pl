@@ -59,11 +59,13 @@ foreach my $plugin (@plugins) {
 	my %data = $node->fetch($plugin);
   my %cnf = $node->config($plugin);
 
+  my $cnf_section = $cnf{global}->{graph_category} || 'unknown';
+
 	foreach my $stat (keys %data) {
     my $cnf_type = $cnf{datasource}->{$stat}->{type} || 'GAUGE';
     my $statsd_control = 'g';
     $statsd_control = 'c' if ($cnf_type =~ /(DERIVE)|(COUNTER)|(ABSOLUTE)/);
-		$packet .= $schemabase."$fqdn.$plugin.$stat:".$data{$stat}."|$statsd_control\n";
+		$packet .= $schemabase."$fqdn.$plugin.$cnf_section.$stat:".$data{$stat}."|$statsd_control\n";
 	}
 }
 
