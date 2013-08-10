@@ -31,7 +31,7 @@ use Munin::Node::Client;
 use IO::Socket::INET;
 
 # Configuration
-my $schemabase		= "node.";
+my $schemabase		= "";
 my $statsdhost		= "statsd.company.com";
 my $statsdport		= 8125;
 my $muninhost		= shift || "localhost";
