@@ -34,7 +34,7 @@ use IO::Socket::INET;
 my $schemabase		= "node.";
 my $statsdhost		= "statsd.company.com";
 my $statsdport		= 8125;
-my $muninhost		= "localhost";
+my $muninhost		= shift || "localhost";
 my $muninport		= 4949;
 
 
