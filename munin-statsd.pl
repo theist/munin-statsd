@@ -57,8 +57,13 @@ my $packet = "";
 
 foreach my $plugin (@plugins) {
 	my %data = $node->fetch($plugin);
+  my %cnf = $node->config($plugin);
+
 	foreach my $stat (keys %data) {
-		$packet .= $schemabase."$fqdn.$plugin.$stat:".$data{$stat}."|g\n";
+    my $cnf_type = $cnf{datasource}->{$stat}->{type} || 'GAUGE';
+    my $statsd_control = 'g';
+    $statsd_control = 'c' if ($cnf_type =~ /(DERIVE)|(COUNTER)|(ABSOLUTE)/);
+		$packet .= $schemabase."$fqdn.$plugin.$stat:".$data{$stat}."|$statsd_control\n";
 	}
 }
 
