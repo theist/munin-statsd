@@ -64,7 +64,7 @@ foreach my $plugin (@plugins) {
     my $cnf_type = $cnf{datasource}->{$stat}->{type} || 'GAUGE';
     my $statsd_control = 'g';
     $statsd_control = 'c' if ($cnf_type =~ /(DERIVE)|(COUNTER)|(ABSOLUTE)/);
-		$packet .= $schemabase."$fqdn.$plugin.$cnf_section.$stat:".$data{$stat}."|$statsd_control\n";
+		$packet .= $schemabase."$muninhost.$cnf_section.$plugin.$stat:".$data{$stat}."|$statsd_control\n";
 	}
 }
 
